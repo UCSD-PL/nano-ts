@@ -30,7 +30,7 @@ drwxr-xr-x 8  typescript
        Make sure that the command "node" works on the terminal.
 	   If you dont, create a link (ln -s) in /usr/local/bin in to
 	   the node script (which is in the folder where you installed it).   
-   4.2 Install tsc:
+   4.2 Install tsc (NOT ANDATORY ANYMORE):
        After 4.1, you have the npm utility to install new js code.
        The command npm might not be available, but the npm script is
        in the folder where you installed node.js, in node-v0.10.20/deps/npm/bin/npm
@@ -38,7 +38,7 @@ drwxr-xr-x 8  typescript
 	   Make sure you have the "tsc" command in the terinal, otherwise, do the same
 	   thing as in 4.1.
 
-5. Apply the patch:
+5. Apply the patch (NOT MANDATORY ANYMORE):
  Go to cse199-code-0
  run: ./applypatch
 
