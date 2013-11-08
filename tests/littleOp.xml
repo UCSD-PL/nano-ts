@@ -1,0 +1,31 @@
+<SourceUnit>
+    <List>
+        <ExpressionStatement>
+            <MultiplyExpression>
+                <ParenthesizedExpression>
+                    <OpenParenToken>(</OpenParenToken>
+                    <AddExpression>
+                        <NumericLiteral>3</NumericLiteral>
+                        <PlusToken>+</PlusToken>
+                        <NumericLiteral>2</NumericLiteral>
+                    </AddExpression>
+                    <CloseParenToken>)</CloseParenToken>
+                </ParenthesizedExpression>
+                <AsteriskToken>*</AsteriskToken>
+                <ParenthesizedExpression>
+                    <OpenParenToken>(</OpenParenToken>
+                    <AddExpression>
+                        <NumericLiteral>4</NumericLiteral>
+                        <PlusToken>+</PlusToken>
+                        <NumericLiteral>5</NumericLiteral>
+                    </AddExpression>
+                    <CloseParenToken>)
+</CloseParenToken>
+                </ParenthesizedExpression>
+            </MultiplyExpression>
+            <SemicolonToken/>
+        </ExpressionStatement>
+    </List>
+    <EndOfFileToken/>
+</SourceUnit>
+
