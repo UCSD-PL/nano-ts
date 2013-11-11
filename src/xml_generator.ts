@@ -68,6 +68,18 @@ class XMLGenerator {
 	}
 
 	/**
+	 * Clean full text: remov all whitespaces,tabs and returns before and after
+	 */
+	private _cleanFullText(str : string) : string {
+		var res : string = "";
+		for (var i : number  = 0 ; i < str.length ; i++) {
+			var letter = str[i];
+			if (letter != ' ' && letter != '\t' && letter != '\r' && letter != '\n')
+			res += letter;
+		}
+		return res;
+	}
+	/**
 	 * This is used to convert the last elements of the SyntaxKind enumeration
 	 * into their real value: sometimes they use those values of the enumaration
 	 * (which represent the boundaies of the different groups of kinds of nodes
@@ -92,7 +104,7 @@ class XMLGenerator {
 			case "FirstPunctuation": return "OpenBraceToken";
 			case "LastPunctuation": return "SlashEqualsToken";
 			case "FirstFixedWidth": return "FirstKeyword";
-			case "LastFixedWidth": return "LastPunctuation";
+			case "LastFixedWidth": return this._convertNotations("LastPunctuation");
 			default: return str;
 		}
 	}
@@ -119,7 +131,7 @@ class XMLGenerator {
 	private _buildLeaf(el : TypeScript.ISyntaxElement) : DOMElement {
 		var name :string = this._convertNotations(TypeScript.SyntaxKind[el.kind()]);
 		if (this._filterLeafs(name)) {
-			var del : DOMElement = new DOMTextElement(name,el.fullText());
+			var del : DOMElement = new DOMTextElement(name,this._cleanFullText(el.fullText()));
 			return del;
 		} else {
 			return null;

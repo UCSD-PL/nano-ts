@@ -58386,6 +58386,19 @@ var XMLGenerator = (function () {
     };
 
     /**
+    * Clean full text: remov all whitespaces,tabs and returns before and after
+    */
+    XMLGenerator.prototype._cleanFullText = function (str) {
+        var res = "";
+        for (var i = 0; i < str.length; i++) {
+            var letter = str[i];
+            if (letter != ' ' && letter != '\t' && letter != '\r' && letter != '\n')
+                res += letter;
+        }
+        return res;
+    };
+
+    /**
     * This is used to convert the last elements of the SyntaxKind enumeration
     * into their real value: sometimes they use those values of the enumaration
     * (which represent the boundaies of the different groups of kinds of nodes
@@ -58426,7 +58439,7 @@ var XMLGenerator = (function () {
             case "FirstFixedWidth":
                 return "FirstKeyword";
             case "LastFixedWidth":
-                return "LastPunctuation";
+                return this._convertNotations("LastPunctuation");
             default:
                 return str;
         }
@@ -58453,7 +58466,7 @@ var XMLGenerator = (function () {
     XMLGenerator.prototype._buildLeaf = function (el) {
         var name = this._convertNotations(TypeScript.SyntaxKind[el.kind()]);
         if (this._filterLeafs(name)) {
-            var del = new DOMTextElement(name, el.fullText());
+            var del = new DOMTextElement(name, this._cleanFullText(el.fullText()));
             return del;
         } else {
             return null;
