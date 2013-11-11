@@ -58330,6 +58330,11 @@ var DOMAttribute = (function () {
 ///<reference path='../typescript/src/compiler/syntax/syntaxTree.ts' />
 ///<reference path='../typescript/src/compiler/syntax/syntaxKind.ts' />
 ///<reference path='tsdom.ts' />
+function endsWith(str, suffix) {
+    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+}
+;
+
 var XMLGenerator = (function () {
     function XMLGenerator(tree) {
         this._tree = tree;
@@ -58368,6 +58373,16 @@ var XMLGenerator = (function () {
             res = this._buildNode(el);
         }
         return res;
+    };
+
+    /**
+    * Filter: remove all keywords and tokens from the generated xml
+    */
+    XMLGenerator.prototype._filterLeafs = function (str) {
+        if (endsWith(str, "Keyword") || endsWith(str, "Token")) {
+            return false;
+        }
+        return true;
     };
 
     /**
@@ -58436,8 +58451,13 @@ var XMLGenerator = (function () {
     * tst in the XML.
     */
     XMLGenerator.prototype._buildLeaf = function (el) {
-        var del = new DOMTextElement(this._convertNotations(TypeScript.SyntaxKind[el.kind()]), el.fullText());
-        return del;
+        var name = this._convertNotations(TypeScript.SyntaxKind[el.kind()]);
+        if (this._filterLeafs(name)) {
+            var del = new DOMTextElement(name, el.fullText());
+            return del;
+        } else {
+            return null;
+        }
     };
     return XMLGenerator;
 })();

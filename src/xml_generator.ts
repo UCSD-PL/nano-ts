@@ -4,6 +4,11 @@
 ///<reference path='../typescript/src/compiler/syntax/syntaxTree.ts' />
 ///<reference path='../typescript/src/compiler/syntax/syntaxKind.ts' />
 ///<reference path='tsdom.ts' />
+
+function endsWith(str: string, suffix : string) {
+    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+};
+
 class XMLGenerator {
 
 	private _tree : TypeScript.SyntaxTree;
@@ -51,6 +56,16 @@ class XMLGenerator {
 		return res;
 	}
 
+	/**
+	 * Filter: remove all keywords and tokens from the generated xml
+	 */
+	private _filterLeafs(str : string) : boolean {
+		if (endsWith(str,"Keyword")
+			||endsWith(str,"Token")){
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * This is used to convert the last elements of the SyntaxKind enumeration
@@ -102,8 +117,13 @@ class XMLGenerator {
 	 * tst in the XML.
 	 */
 	private _buildLeaf(el : TypeScript.ISyntaxElement) : DOMElement {
-		var del : DOMElement = new DOMTextElement(this._convertNotations(TypeScript.SyntaxKind[el.kind()]),el.fullText());
-		return del;
+		var name :string = this._convertNotations(TypeScript.SyntaxKind[el.kind()]);
+		if (this._filterLeafs(name)) {
+			var del : DOMElement = new DOMTextElement(name,el.fullText());
+			return del;
+		} else {
+			return null;
+		}
 	}
 
 }
