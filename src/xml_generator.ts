@@ -120,11 +120,33 @@ class XMLGenerator {
 	 */
 	private _buildNode(el : TypeScript.ISyntaxElement) : DOMElement {
 		var del : DOMElement = new DOMElement(this._convertNotations(TypeScript.SyntaxKind[el.kind()]));
+		if (del.tagName() == "ForStatement"){
+			return this._buildForNode(del,<TypeScript.ForStatementSyntax>el);
+		}
 		for (var i = 0 ; i < el.childCount() ; i++){
 			del.appendChild(this._toXML(el.childAt(i)))
 		}
 		return del;
 	}
+
+	/**
+	 *Special treatment for For loops: we need to identify the four elements of the loop
+	 */
+	 private _buildForNode (del : DOMElement, el : TypeScript.ForStatementSyntax) : DOMElement {
+	 	var tmp : DOMElement = new DOMElement("ForLoopInit");
+		tmp.appendChild(this._toXML(el.initializer));
+	 	del.appendChild(tmp);
+		tmp = new DOMElement("ForLoopTest");
+		tmp.appendChild(this._toXML(el.condition));
+	 	del.appendChild(tmp);
+		tmp = new DOMElement("ForLoopInc");
+		tmp.appendChild(this._toXML(el.incrementor));
+	 	del.appendChild(tmp)
+		tmp = new DOMElement("ForLoopBody");
+		tmp.appendChild(this._toXML(el.childAt(9)));
+	 	del.appendChild(tmp)
+		return del;
+	 }
 
 	/**
 	 * Create a leaf of the DOM tree based on a leaf of the syntax tree.
