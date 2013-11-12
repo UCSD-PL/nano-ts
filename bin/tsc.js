@@ -58379,7 +58379,7 @@ var XMLGenerator = (function () {
     * Filter: remove all keywords and tokens from the generated xml
     */
     XMLGenerator.prototype._filterLeafs = function (str) {
-        if ((str != "TrueKeyword") && (str != "FalseKeyword") && (endsWith(str, "Keyword") || endsWith(str, "Token"))) {
+        if ((str != "TrueKeyword") && (str != "FalseKeyword") && (str != "ThisKeyword") && (str != "NullKeyword") && (endsWith(str, "Keyword") || endsWith(str, "Token"))) {
             return false;
         }
         return true;

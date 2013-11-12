@@ -60,7 +60,10 @@ class XMLGenerator {
 	 * Filter: remove all keywords and tokens from the generated xml
 	 */
 	private _filterLeafs(str : string) : boolean {
-		if ((str != "TrueKeyword") && (str != "FalseKeyword") 
+		if ((str != "TrueKeyword") 
+			&& (str != "FalseKeyword")
+			&& (str != "ThisKeyword")
+			&& (str != "NullKeyword")
 			&& (endsWith(str,"Keyword") || endsWith(str,"Token"))){
 			return false;
 		}
