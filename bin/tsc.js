@@ -58375,11 +58375,15 @@ var XMLGenerator = (function () {
         return res;
     };
 
+    XMLGenerator.prototype._typeKeyword = function (str) {
+        return (str == "AnyKeyword" || str == "BooleanKeyword" || str == "BoolKeyword" || str == "ConstructorKeyword" || str == "DeclareKeyword" || str == "GetKeyword" || str == "ModuleKeyword" || str == "RequireKeyword" || str == "NumberKeyword" || str == "SetKeyword" || str == "StringKeyword");
+    };
+
     /**
     * Filter: remove all keywords and tokens from the generated xml
     */
     XMLGenerator.prototype._filterLeafs = function (str) {
-        if ((str != "TrueKeyword") && (str != "FalseKeyword") && (str != "ThisKeyword") && (str != "NullKeyword") && (endsWith(str, "Keyword") || endsWith(str, "Token"))) {
+        if ((str != "TrueKeyword") && (str != "FalseKeyword") && (str != "ThisKeyword") && (str != "NullKeyword") && (!this._typeKeyword(str)) && (endsWith(str, "Keyword") || endsWith(str, "Token"))) {
             return false;
         }
         return true;

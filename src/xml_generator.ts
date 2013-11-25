@@ -56,6 +56,20 @@ class XMLGenerator {
 		return res;
 	}
 
+	private _typeKeyword(str: string) : boolean {
+		return (str =="AnyKeyword"
+			|| str == "BooleanKeyword"
+			|| str == "BoolKeyword"
+			|| str == "ConstructorKeyword"
+			|| str == "DeclareKeyword"
+			|| str == "GetKeyword"
+			|| str == "ModuleKeyword"
+			|| str == "RequireKeyword"
+			|| str == "NumberKeyword"
+			|| str == "SetKeyword"
+			|| str == "StringKeyword")
+	}
+
 	/**
 	 * Filter: remove all keywords and tokens from the generated xml
 	 */
@@ -64,6 +78,7 @@ class XMLGenerator {
 			&& (str != "FalseKeyword")
 			&& (str != "ThisKeyword")
 			&& (str != "NullKeyword")
+			&& (!this._typeKeyword(str))
 			&& (endsWith(str,"Keyword") || endsWith(str,"Token"))){
 			return false;
 		}
