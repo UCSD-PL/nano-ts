@@ -58376,7 +58376,7 @@ var XMLGenerator = (function () {
     };
 
     XMLGenerator.prototype._typeKeyword = function (str) {
-        return (str == "AnyKeyword" || str == "BooleanKeyword" || str == "BoolKeyword" || str == "ConstructorKeyword" || str == "DeclareKeyword" || str == "GetKeyword" || str == "ModuleKeyword" || str == "RequireKeyword" || str == "NumberKeyword" || str == "SetKeyword" || str == "StringKeyword");
+        return (str == "AnyKeyword" || str == "BooleanKeyword" || str == "BoolKeyword" || str == "ConstructorKeyword" || str == "DeclareKeyword" || str == "GetKeyword" || str == "ModuleKeyword" || str == "RequireKeyword" || str == "NumberKeyword" || str == "SetKeyword" || str == "StringKeyword" || str == "VoidKeyword");
     };
 
     /**

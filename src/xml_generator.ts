@@ -67,7 +67,8 @@ class XMLGenerator {
 			|| str == "RequireKeyword"
 			|| str == "NumberKeyword"
 			|| str == "SetKeyword"
-			|| str == "StringKeyword")
+			|| str == "StringKeyword"
+			|| str == "VoidKeyword")
 	}
 
 	/**

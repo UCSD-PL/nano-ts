@@ -1,4 +1,3 @@
-
 /**
  *  Functions and variables related to numeric calculus.
  */
